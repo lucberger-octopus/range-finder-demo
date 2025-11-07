@@ -6,4 +6,5 @@ export type Car = {
 
 export type SelectorType = {
   car: Car | undefined;
+  selectCar: (car: Car) => void;
 };
