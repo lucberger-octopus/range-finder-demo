@@ -1,0 +1,46 @@
+.container {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  top: 20px;
+  left: 20px;
+  bottom: 20px;
+  position: absolute;
+  padding: 5px;
+  pointer-events: auto;
+  gap: 5px;
+  overflow-y: auto;
+}
+
+.car {
+  display: grid;
+  padding: 10px;
+  border-radius: 15px;
+
+  &.selected {
+    background-color: rgba(45, 0, 140, 0.5);
+  }
+
+  &:hover:not(.selected) {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+}
+
+.image {
+  width: 60px;
+  height: 40px;
+  object-fit: contain;
+}

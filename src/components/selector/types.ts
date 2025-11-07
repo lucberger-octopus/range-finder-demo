@@ -1,6 +1,6 @@
 export type Car = {
   name: string;
-  range: string;
+  range: number;
   price: string;
 };
 
