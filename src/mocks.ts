@@ -13,4 +13,8 @@ export const mockedCars: Car[] = [
     name: "Car C",
     range: 200000,
   },
+  {
+    name: "Car D",
+    range: 50000,
+  },
 ];
