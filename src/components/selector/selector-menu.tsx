@@ -28,9 +28,7 @@ function CarOption({ car }: { car: Car }) {
       <img className={styles.image} src={car.image} />
       <div className={styles.details}>
         <div className={styles.name}>{car.name}</div>
-        <div className={styles.stats}>
-          <div className={styles.stat}>Range: {car.range / 1000}km</div>
-        </div>
+        <div className={styles.stat}>Range: {car.range / 1000}km</div>
       </div>
     </div>
   );
