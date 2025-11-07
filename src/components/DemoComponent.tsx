@@ -1,8 +1,9 @@
 import { useMap, useMapEvents } from 'react-leaflet/hooks'
 import axios from 'axios'
 import { Polygon } from 'react-leaflet/Polygon';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelectorContext } from './selector/selector-context';
+
 
 function ringCoordsHashToArray(ring) {
     return ring.map(function (latLng) {
@@ -10,17 +11,17 @@ function ringCoordsHashToArray(ring) {
     });
 }
 
-const purpleOptions = { color: 'purple' }
-
 export const DemoComponent = () => {
 
     const { car } = useSelectorContext();
-
     const map = useMap();
 
     const [shapeCoords, setShapeCoords] = useState(null);
+    const [coords, setCoords] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const triggerRequest = async (coords: any) => {
+    const triggerRequest = useCallback(async (coords: any) => {
+        setLoading(true);
         const response = await axios.post('https://api.traveltimeapp.com/v4/distance-map', {
             departure_searches: [
                 {
@@ -51,10 +52,12 @@ export const DemoComponent = () => {
         });
 
         setShapeCoords(shapesCoords);
-    }
+        setLoading(false);
+    }, [car]);
 
     useMapEvents({
         click: (e) => {
+            setCoords(e.latlng);
             triggerRequest(e.latlng)
         }
     })
@@ -64,5 +67,14 @@ export const DemoComponent = () => {
         map.fitBounds(shapeCoords);
     }, [shapeCoords]);
 
-    return shapeCoords ? <Polygon pathOptions={purpleOptions} positions={shapeCoords} /> : null;
+    useEffect(() => {
+        if (!car?.range) return;
+        triggerRequest(coords);
+    }, [car?.range])
+
+    return (
+        <>
+            {shapeCoords ? <Polygon pathOptions={{color: '#2D008C'}} positions={shapeCoords} /> : null}
+        </>
+    );
 };
