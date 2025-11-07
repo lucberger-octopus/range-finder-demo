@@ -2,7 +2,10 @@
   position: absolute;
   inset: 0;
   z-index: 1000;
+  display: flex;
   pointer-events: none;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .panel {
@@ -15,14 +18,11 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   width: 300px;
   max-width: 33%;
-  top: 20px;
-  left: 20px;
-  bottom: 20px;
-  position: absolute;
   padding: 5px;
   pointer-events: auto;
   gap: 5px;
   overflow-y: auto;
+  flex-grow: 0;
 }
 
 .car {
